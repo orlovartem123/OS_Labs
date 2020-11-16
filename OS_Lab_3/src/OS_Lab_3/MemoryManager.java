@@ -8,12 +8,15 @@ public class MemoryManager {
 
     private Ram ram;
 
+    private HDD hdd;
+
     public MemoryManager(LinkedList<Page> pageList, Ram ram) {
         pageTable = new PageTable(pageList);
         this.ram = ram;
+        hdd = new HDD(ram.getMemory().length * 2);
     }
 
-    public void work(int id) {
+    public boolean work(int id) {
         int ramIndex = pageTable.getPage(id).getRamId();
         if (ramIndex == -1) {
             System.out.println("    Сгенерировано страничное прерывание, процесс прерывает работу...");
@@ -38,6 +41,9 @@ public class MemoryManager {
                     if (pageTable.getPage(ram.getMemory()[i]).getStatus() == minStatus) {
                         pageTable.getPage(ram.getMemory()[i]).setOnHdd(true);
                         System.out.println("    Виртуальная страница с id " + ram.getMemory()[i] + " размещенная в физической странице с адресом " + i + " выгружается на жесткий диск");
+                        if(!hdd.insertPage(ram.getMemory()[i])){
+                            return false;
+                        }
                         insertInRam(ram, i, id);
                         System.out.println("    Процесс продолжает работу");
                         break;
@@ -47,6 +53,7 @@ public class MemoryManager {
         } else {
             if (pageTable.getPage(id).getOnHdd()) {
                 System.out.println("    Осуществляется подкачка виртуальной страницы с id " + ram.getMemory()[ramIndex]);
+                hdd.freeSpace(ram.getMemory()[ramIndex]);
                 int minStatus = 5;
                 for (int i = 0; i < ram.getMemory().length; i++) {
                     if (pageTable.getPage(ram.getMemory()[i]).getStatus() < minStatus) {
@@ -57,6 +64,9 @@ public class MemoryManager {
                     if (pageTable.getPage(ram.getMemory()[i]).getStatus() == minStatus) {
                         pageTable.getPage(ram.getMemory()[i]).setOnHdd(true);
                         System.out.println("    Виртуальная страница с id " + ram.getMemory()[i] + " размещенная в физической странице с адресом " + i + " выгружается на жесткий диск");
+                        if(!hdd.insertPage(ram.getMemory()[i])){
+                            return false;
+                        }
                         insertInRam(ram, i, id);
                         break;
                     }
@@ -64,6 +74,7 @@ public class MemoryManager {
             }
         }
         System.out.println("Обращение к виртуальной странице с id " + id + " прошло успешно\n");
+        return true;
     }
 
     private void insertInRam(Ram ram, int i, int id) {
@@ -74,5 +85,9 @@ public class MemoryManager {
         pageTable.getPage(id).setOnHdd(false);
         pageTable.resetPageRequest(id);
         ram.checkIsFull();
+    }
+
+    private void insertInHdd(int id) {
+        hdd.insertPage(id);
     }
 }
