@@ -36,7 +36,7 @@ public class MemoryManager {
                 }
                 for (int i = 0; i < ram.getMemory().length; i++) {
                     if (pageTable.getPage(ram.getMemory()[i]).getStatus() == minStatus) {
-                        pageTable.getPage(ram.getMemory()[i]).setModified(true);
+                        pageTable.getPage(ram.getMemory()[i]).setOnHdd(true);
                         System.out.println("    Виртуальная страница с id " + ram.getMemory()[i] + " размещенная в физической странице с адресом " + i + " выгружается на жесткий диск");
                         insertInRam(ram, i, id);
                         System.out.println("    Процесс продолжает работу");
@@ -45,7 +45,7 @@ public class MemoryManager {
                 }
             }
         } else {
-            if (pageTable.getPage(id).getModified()) {
+            if (pageTable.getPage(id).getOnHdd()) {
                 System.out.println("    Осуществляется подкачка виртуальной страницы с id " + ram.getMemory()[ramIndex]);
                 int minStatus = 5;
                 for (int i = 0; i < ram.getMemory().length; i++) {
@@ -55,7 +55,7 @@ public class MemoryManager {
                 }
                 for (int i = 0; i < ram.getMemory().length; i++) {
                     if (pageTable.getPage(ram.getMemory()[i]).getStatus() == minStatus) {
-                        pageTable.getPage(ram.getMemory()[i]).setModified(true);
+                        pageTable.getPage(ram.getMemory()[i]).setOnHdd(true);
                         System.out.println("    Виртуальная страница с id " + ram.getMemory()[i] + " размещенная в физической странице с адресом " + i + " выгружается на жесткий диск");
                         insertInRam(ram, i, id);
                         break;
@@ -71,7 +71,7 @@ public class MemoryManager {
         System.out.println("    Виртуальная страница с id " + id + " отображена в физическую страницу с адресом " + i);
         pageTable.getPage(id).setRamId(i);
         pageTable.getPage(id).setRequest(true);
-        pageTable.getPage(id).setModified(false);
+        pageTable.getPage(id).setOnHdd(false);
         pageTable.resetPageRequest(id);
         ram.checkIsFull();
     }

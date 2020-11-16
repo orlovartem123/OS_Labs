@@ -12,42 +12,47 @@ public class Page {
         ramId = value;
     }
 
-    private boolean isModified = false;
+    private boolean isOnHdd = false;
 
-    public boolean getModified() {
-        return isModified;
+    public boolean getOnHdd() {
+        return isOnHdd;
     }
 
-    public void setModified(boolean value) {
-        isModified = value;
-        modifyStatus();
+    public void setOnHdd(boolean value) {
+        isOnHdd = value;
+        //modifyStatus();
     }
 
     private boolean isRequest = false;
 
     public void setRequest(boolean value) {
         isRequest = value;
-        modifyStatus();
+        if(value){
+            status=1;
+        }else{
+            status=0;
+        }
+        //modifyStatus();
     }
 
-    private int status = 1;
+    private int status = 0;
 
     public int getStatus() {
         return status;
     }
 
-    private void modifyStatus() {
-        if (!isRequest && !isModified) {
-            status = 1;
-        }
-        if (!isRequest && isModified) {
-            status = 2;
-        }
-        if (isRequest && !isModified) {
-            status = 3;
-        }
-        if (isRequest && isModified) {
-            status = 4;
-        }
-    }
+    //private void modifyStatus() {
+        //if (!isRequest && !isOnHdd) {
+            //status = 1;
+        //}
+        //if (!isRequest && isOnHdd) {
+            //status = 2;
+        //}
+        //if (isRequest && !isOnHdd) {
+            //status = 3;
+        //}
+        //if (isRequest && isOnHdd) {
+            //status = 4;
+        //}
+    //}
 }
