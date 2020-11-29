@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="formPortPane" prefHeight="562.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
+   <children>
+      <Button fx:id="buttonCreateFolder" layoutX="336.0" layoutY="216.0" mnemonicParsing="false" onAction="#buttonCreateFolderClick" prefHeight="25.0" prefWidth="108.0" text="Create folder" />
+      <ListView fx:id="listBoxFiles" layoutX="11.0" layoutY="14.0" prefHeight="541.0" prefWidth="312.0" />
+      <Canvas fx:id="cdView" height="547.0" layoutX="460.0" layoutY="8.0" width="580.0" />
+      <Button fx:id="buttonCreateFile" layoutX="336.0" layoutY="256.0" mnemonicParsing="false" onAction="#buttonCreateFileClick" prefHeight="25.0" prefWidth="108.0" text="Create file" />
+      <Button fx:id="buttonBack" layoutX="336.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonBackClick" prefHeight="25.0" prefWidth="108.0" text="Back" />
+      <TextField fx:id="textFieldName" layoutX="336.0" layoutY="175.0" prefHeight="25.0" prefWidth="108.0" />
+      <Button fx:id="buttonDelete" layoutX="336.0" layoutY="296.0" mnemonicParsing="false" onAction="#buttonDeleteClick" prefHeight="25.0" prefWidth="108.0" text="Delete" />
+      <Button fx:id="buttonCopy" layoutX="336.0" layoutY="333.0" mnemonicParsing="false" onAction="#buttonCopyClick" prefHeight="25.0" prefWidth="108.0" text="Copy" />
+      <Button fx:id="buttonCut" layoutX="336.0" layoutY="372.0" mnemonicParsing="false" onAction="#buttonCutClick" prefHeight="25.0" prefWidth="108.0" text="Cut" />
+      <Label layoutX="340.0" layoutY="149.0" text="Folder or file name" />
+      <Button fx:id="buttonGoIn" layoutX="336.0" layoutY="49.0" mnemonicParsing="false" onAction="#buttonGoInClick" prefHeight="25.0" prefWidth="108.0" text="Go In" />
+      <Button fx:id="buttonPaste" layoutX="336.0" layoutY="410.0" mnemonicParsing="false" onAction="#buttonPasteClick" prefHeight="25.0" prefWidth="108.0" text="Paste" />
+   </children>
+</AnchorPane>

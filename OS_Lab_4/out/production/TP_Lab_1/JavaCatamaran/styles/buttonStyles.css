@@ -1,0 +1,27 @@
+.buttonUpStyle{
+  -fx-background-image:  url('/sample/images/UpArrow.png');
+   -fx-background-size: 30px, 30px;
+
+   -fx-background-position: center;
+}
+
+.buttonLeftStyle{
+  -fx-background-image:  url('/sample/images/LeftArrow.png');
+   -fx-background-size: 30px, 30px;
+
+   -fx-background-position: center;
+}
+
+.buttonDownStyle{
+  -fx-background-image:  url('/sample/images/DownArrow.png');
+   -fx-background-size: 30px, 30px;
+
+   -fx-background-position: center;
+}
+
+.buttonRightStyle{
+  -fx-background-image:  url('/sample/images/RightArrow.png');
+   -fx-background-size: 30px, 30px;
+
+   -fx-background-position: center;
+}
