@@ -1,0 +1,29 @@
+int lotteryResult = rand.nextInt(sumValue);
+            for (int i = 0; i < arrProcess.size(); i++) {
+                if (lotteryResult - arrProcess.get(i).getValue() > 0) {
+                    lotteryResult -= arrProcess.get(i).getValue();
+                } else {
+                    //int valueThr=0;
+                    for (int j = 0; j < arrProcess.get(i).arrThread.size() ; j++) {
+                        if (lotteryResult - arrProcess.get(i).arrThread.get(j).getValue() > 0) {
+                            lotteryResult -= arrProcess.get(i).arrThread.get(j).getValue();
+                        }
+                        else {
+                            int valueThr=arrProcess.get(i).arrThread.get(j).getValue();
+                            System.out.println("поток " +arrProcess.get(i).arrThread.get(j).gettID()+ " процесса "+ arrProcess.get(i).getpID() +" начал выполнение");
+                            arrProcess.get(i).arrThread.get(j).working();
+                            arrProcess.get(i).arrThread.remove(j);
+                            arrProcess.get(i).setValue(arrProcess.get(i).getValue()-valueThr);
+                            sumValue-=valueThr;
+                            if (arrProcess.get(i).getValue()==0) {
+                                System.out.println("процесс " +arrProcess.get(i).getpID()+ " выполнен успешно");
+                                System.out.println();
+                                arrProcess.remove(i);
+                                break;
+                            }
+                        }
+                    }
+                    //выбираем нужный нам поток и обрабатываем его
+                    //уменьшаем ценность процесса и вырезаем поток из процесса
+                }
+            }
